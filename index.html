@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="SkillBot — AI-powered interview preparation for Soft Skills, Aptitude, Communication and Technical skills from top companies like Google, Amazon, TCS, Infosys and more.">
+    <title>SkillBot | Interview Preparation Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="dark">
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode" aria-label="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+    </button>
+
+    <!-- Full App Layout -->
+    <div class="app-shell">
+
+        <!-- ====== SIDEBAR ====== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-wrap">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="48" height="48" rx="12" fill="url(#g1)" />
+                            <path d="M14 24c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10" stroke="white"
+                                stroke-width="2.5" stroke-linecap="round" />
+                            <path d="M24 24l-6 3 6-13 6 13-6-3z" fill="white" />
+                            <defs>
+                                <linearGradient id="g1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#6C63FF" />
+                                    <stop offset="1" stop-color="#3ECFCF" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="logo-text">SkillBot</h1>
+                        <p class="logo-tagline">Interview Prep Assistant</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="new-chat-btn" id="newChatBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                New Chat
+            </button>
+
+            <!-- Quick Category Shortcuts -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-section-title">SKILL CATEGORIES</h3>
+                <nav class="quick-links">
+                    <button class="quick-link" data-query="soft skills teamwork leadership">
+                        <span class="ql-icon">🤝</span>
+                        <span>Soft Skills</span>
+                    </button>
+                    <button class="quick-link" data-query="aptitude quantitative questions practice">
+                        <span class="ql-icon">🧠</span>
+                        <span>Aptitude</span>
+                    </button>
+                    <button class="quick-link" data-query="communication skills tips verbal written">
+                        <span class="ql-icon">💬</span>
+                        <span>Communication</span>
+                    </button>
+                    <button class="quick-link" data-query="technical programming data structures">
+                        <span class="ql-icon">💻</span>
+                        <span>Technical Skills</span>
+                    </button>
+                    <button class="quick-link" data-query="system design distributed systems">
+                        <span class="ql-icon">⚙️</span>
+                        <span>System Design</span>
+                    </button>
+                    <button class="quick-link" data-query="hr interview questions tell me about yourself">
+                        <span class="ql-icon">🏢</span>
+                        <span>HR Interview</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Company Shortcuts -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-section-title">COMPANIES</h3>
+                <nav class="company-links">
+                    <button class="company-chip" data-query="google interview questions">Google</button>
+                    <button class="company-chip" data-query="amazon interview tips">Amazon</button>
+                    <button class="company-chip" data-query="microsoft interview">Microsoft</button>
+                    <button class="company-chip" data-query="tcs interview questions">TCS</button>
+                    <button class="company-chip" data-query="infosys interview tips">Infosys</button>
+                    <button class="company-chip" data-query="wipro interview preparation">Wipro</button>
+                    <button class="company-chip" data-query="accenture interview guide">Accenture</button>
+                    <button class="company-chip" data-query="cognizant interview tips">Cognizant</button>
+                </nav>
+            </div>
+
+            <!-- Daily tip -->
+            <div class="sidebar-tip" id="dailyTip">
+                <div class="tip-icon">💡</div>
+                <div class="tip-text">Loading today's tip...</div>
+            </div>
+        </aside>
+
+        <!-- ====== MAIN CHAT AREA ====== -->
+        <main class="chat-main">
+
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
+                <span class="mobile-logo">SkillBot</span>
+                <button class="theme-toggle-mobile" id="themeToggleMobile" aria-label="Toggle theme">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messagesContainer">
+
+                <!-- Welcome Screen (shown when no messages yet) -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-hero">
+                        <div class="welcome-avatar">
+                            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="80" height="80" rx="20" fill="url(#wg1)" />
+                                <path d="M22 40c0-9.9 8.1-18 18-18s18 8.1 18 18-8.1 18-18 18" stroke="white"
+                                    stroke-width="3.5" stroke-linecap="round" />
+                                <path d="M40 40l-10 5 10-22 10 22-10-5z" fill="white" />
+                                <defs>
+                                    <linearGradient id="wg1" x1="0" y1="0" x2="80" y2="80"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#6C63FF" />
+                                        <stop offset="1" stop-color="#3ECFCF" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h2 class="welcome-title">Hi, I'm <span class="gradient-text">SkillBot</span> 👋</h2>
+                        <p class="welcome-subtitle">Your AI-powered interview preparation assistant. Ask me anything
+                            about skills, aptitude, and company-specific interview questions.</p>
+                    </div>
+
+                    <!-- Suggestion Cards -->
+                    <div class="suggestion-grid">
+                        <button class="suggestion-card"
+                            data-query="Tell me about teamwork soft skills interview questions">
+                            <div class="sg-icon">🤝</div>
+                            <div class="sg-content">
+                                <div class="sg-title">Soft Skills</div>
+                                <div class="sg-desc">Leadership, teamwork, adaptability & STAR method</div>
+                            </div>
+                        </button>
+                        <button class="suggestion-card" data-query="Give me aptitude quantitative practice problems">
+                            <div class="sg-icon">🧠</div>
+                            <div class="sg-content">
+                                <div class="sg-title">Aptitude Practice</div>
+                                <div class="sg-desc">Quant problems, logical reasoning & data interpretation</div>
+                            </div>
+                        </button>
+                        <button class="suggestion-card"
+                            data-query="Communication skills professional email presentation tips">
+                            <div class="sg-icon">💬</div>
+                            <div class="sg-content">
+                                <div class="sg-title">Communication Skills</div>
+                                <div class="sg-desc">Verbal, written, presentation & active listening</div>
+                            </div>
+                        </button>
+                        <button class="suggestion-card"
+                            data-query="Technical programming interview OOP data structures algorithms">
+                            <div class="sg-icon">💻</div>
+                            <div class="sg-content">
+                                <div class="sg-title">Technical Interview</div>
+                                <div class="sg-desc">DSA, system design, DBMS & programming concepts</div>
+                            </div>
+                        </button>
+                        <button class="suggestion-card" data-query="Amazon interview tips leadership principles">
+                            <div class="sg-icon">🏢</div>
+                            <div class="sg-content">
+                                <div class="sg-title">Company Questions</div>
+                                <div class="sg-desc">Google, Amazon, TCS, Infosys & more</div>
+                            </div>
+                        </button>
+                        <button class="suggestion-card" data-query="fresher placement preparation guide interview tips">
+                            <div class="sg-icon">🎓</div>
+                            <div class="sg-content">
+                                <div class="sg-title">Fresher's Guide</div>
+                                <div class="sg-desc">Complete campus placement roadmap</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages will be injected here -->
+                <div class="messages-list" id="messagesList"></div>
+
+            </div>
+
+            <!-- ====== INPUT AREA ====== -->
+            <div class="input-area">
+                <!-- Follow-up suggestion chips -->
+                <div class="follow-up-chips" id="followUpChips"></div>
+
+                <!-- Main Input Box -->
+                <div class="input-box-wrapper">
+                    <div class="input-box">
+                        <textarea id="chatInput"
+                            placeholder="Ask about soft skills, aptitude, communication, technical topics, or a specific company..."
+                            rows="1" maxlength="2000" aria-label="Chat input"></textarea>
+                        <div class="input-actions">
+                            <button class="random-btn" id="randomBtn" title="Random interview question">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 3 21 3 21 8" />
+                                    <line x1="4" y1="20" x2="21" y2="3" />
+                                    <polyline points="21 16 21 21 16 21" />
+                                    <line x1="15" y1="15" x2="21" y2="21" />
+                                </svg>
+                            </button>
+                            <button class="send-btn" id="sendBtn" title="Send message" aria-label="Send message">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13" />
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="input-hint">Press <kbd>Enter</kbd> to send, <kbd>Shift+Enter</kbd> for new line. Click 🔀
+                        for a random question.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script src="chat.js"></script>
+</body>
+
+</html>
